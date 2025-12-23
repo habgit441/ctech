@@ -1,7 +1,85 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
+/* ---------------- TYPEWRITER COMPONENT (LOOPING) ---------------- */
+const Typewriter = ({
+  text,
+  speed = 80,
+  className = "",
+}: {
+  text: string;
+  speed?: number;
+  className?: string;
+}) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let i = displayedText.length;
+    
+    const interval = setInterval(() => {
+      if (!isDeleting) {
+        // Typing forward
+        setDisplayedText(text.slice(0, i + 1));
+        i++;
+        if (i === text.length) {
+          // Pause at end before deleting
+          setTimeout(() => setIsDeleting(true), 2000);
+          clearInterval(interval);
+        }
+      } else {
+        // Deleting backward
+        setDisplayedText(text.slice(0, i - 1));
+        i--;
+        if (i === 0) {
+          setIsDeleting(false);
+          clearInterval(interval);
+        }
+      }
+    }, isDeleting ? speed / 2 : speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed, isDeleting, displayedText]);
+
+  return (
+    <span className={className}>
+      {displayedText}
+      <span className="animate-pulse">|</span>
+    </span>
+  );
+};
+
+//  ---------------- FALLING TEXT ANIMATION ---------------- 
+const FallingText = ({ 
+  children, 
+  delay = 0,
+  className = "" 
+}: { 
+  children: React.ReactNode; 
+  delay?: number;
+  className?: string;
+}) => {
+  return (
+    <motion.span
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 0.8,
+        delay,
+        ease: "easeOut",
+        repeat: Infinity,
+        repeatDelay: 3,
+      }}
+      className={`inline-block ${className}`}
+    >
+      {children}
+    </motion.span>
+  );
+};
+
+/* ---------------- HERO SECTION ---------------- */
 const HeroSection = () => {
   return (
     <section
@@ -10,31 +88,17 @@ const HeroSection = () => {
     >
       {/* Animated Background */}
       <div className="absolute inset-0 animated-grid opacity-30" />
-      
+
       {/* Gradient Orbs */}
       <motion.div
         className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-        animate={{
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
-        animate={{
-          x: [0, -50, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -47,23 +111,24 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-primary/30 mb-8"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">
-              Pioneering Tomorrow's Technology
-            </span>
+            <Typewriter
+              text="Pioneering Tomorrow's Technology"
+              speed={60}
+              className="text-sm text-muted-foreground"
+            />
           </motion.div>
 
-          {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
-          >
-            Innovate.{" "}
-            <span className="gradient-text glow-text">Transform.</span>{" "}
+          {/* Main Heading with Falling Animation */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <FallingText delay={0}>Innovate.</FallingText>{" "}
+            <FallingText delay={0.2} className="gradient-text glow-text">
+              Transform.
+            </FallingText>{" "}
             <br className="hidden md:block" />
-            Lead the Future.
-          </motion.h1>
+            <FallingText delay={0.4}>Lead</FallingText>{" "}
+            <FallingText delay={0.5}>the</FallingText>{" "}
+            <FallingText delay={0.6}>Future.</FallingText>
+          </h1>
 
           {/* Subtitle */}
           <motion.p
@@ -114,7 +179,9 @@ const HeroSection = () => {
                 <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </motion.div>

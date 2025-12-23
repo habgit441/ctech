@@ -14,6 +14,7 @@ const Index = () => {
       <AboutSection />
       <ContactSection />
       <Footer />
+   
     </main>
   );
 };

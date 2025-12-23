@@ -25,7 +25,15 @@ const Footer = () => {
               className="text-2xl font-bold gradient-text inline-block mb-4"
               whileHover={{ scale: 1.05 }}
             >
-              C-Tech
+             <img
+  src="/Images/Logo.png"
+  alt="Logo"
+  className="
+    h-16 sm:h-18 md:h-32
+    w-auto
+    object-contain
+  "
+/>
             </motion.a>
             <p className="text-muted-foreground max-w-sm mb-6">
               Pioneering digital innovation and transforming businesses with
@@ -38,7 +46,7 @@ const Footer = () => {
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-lg  flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />

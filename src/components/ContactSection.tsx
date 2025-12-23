@@ -1,112 +1,214 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "hello@c-tech.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+1 (555) 123-4567",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "San Francisco, CA",
-  },
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^[0-9]{7,15}$/;
+
+const countryCodes = [
+  { code: "+234", label: "Nigeria" },
+  { code: "+1", label: "USA" },
+  { code: "+44", label: "UK" },
+  { code: "+49", label: "Germany" },
+  { code: "+33", label: "France" },
+  { code: "+91", label: "India" },
 ];
 
+type Errors = {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+};
+
+const baseInput =
+  "w-full rounded-xl px-4 py-3 bg-white/80 dark:bg-white/5 backdrop-blur-md border text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 shadow-lg";
+
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    countryCode: "+234",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState<Errors>({});
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({});
+    setSuccess(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newErrors: Errors = {};
+
+    if (!formData.fullName.trim())
+      newErrors.fullName = "Full name is required";
+
+    if (!emailRegex.test(formData.email))
+      newErrors.email = "Enter a valid email address";
+
+    if (!phoneRegex.test(formData.phone))
+      newErrors.phone = "Enter a valid phone number";
+
+    if (!formData.message.trim())
+      newErrors.message = "Message cannot be empty";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setSuccess(true);
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      countryCode: "+234",
+      message: "",
+    });
+  };
+
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 to-transparent" />
-      
-      {/* Animated Orb */}
-      <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+    <section id="contact" className="py-32">
+      <div className="container mx-auto px-6">
+       <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="
+    max-w-5xl mx-auto p-10 md:p-16 rounded-3xl
+   backdrop-blur-xl
+    border 
+   
+    relative
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* CTA Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glass-card p-12 md:p-16 text-center relative overflow-hidden gradient-border"
-          >
-            {/* Inner Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
+    transition-all duration-300 hover:border-primary/50 hover:glow-box
+  "
+>
+          <h2 className="text-4xl font-bold text-center mb-8">
+            Contact <span className="gradient-text">Us</span>
+          </h2>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative z-10"
-            >
-              <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
-                Let's Connect
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to <span className="gradient-text">Transform</span> Your
-                Business?
-              </h2>
-              <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-                Let's discuss how C-Tech can help you achieve your digital goals.
-                Our team is ready to turn your vision into reality.
-              </p>
-
-              {/* CTA Button */}
-              <Button variant="hero" size="xl" className="group mb-12">
-                Start a Conversation
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-
-              {/* Contact Info */}
-              <div className="grid md:grid-cols-3 gap-6 pt-10 border-t border-border/50">
-                {contactInfo.map((info, index) => (
-                  <motion.div
-                    key={info.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                    className="flex flex-col items-center gap-3"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                      <info.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-muted-foreground">
-                        {info.label}
-                      </div>
-                      <div className="font-medium">{info.value}</div>
-                    </div>
-                  </motion.div>
-                ))}
+          <form onSubmit={handleSubmit} className="grid gap-6">
+            {/* Name & Email */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className={`${baseInput} ${
+                    errors.fullName
+                      ? "border-red-500 focus:ring-red-500/40"
+                      : "border-gray-300/40 focus:ring-primary/50"
+                  }`}
+                />
+                {errors.fullName && <ErrorText text={errors.fullName} />}
               </div>
-            </motion.div>
-          </motion.div>
-        </div>
+
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`${baseInput} ${
+                    errors.email
+                      ? "border-red-500 focus:ring-red-500/40"
+                      : "border-gray-300/40 focus:ring-primary/50"
+                  }`}
+                />
+                {errors.email && <ErrorText text={errors.email} />}
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="grid sm:grid-cols-[160px_1fr] gap-4">
+              <select
+                name="countryCode"
+                value={formData.countryCode}
+                onChange={handleChange}
+                className={`${baseInput} border-gray-300/40 focus:ring-primary/50`}
+              >
+                {countryCodes.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.label} ({c.code})
+                  </option>
+                ))}
+              </select>
+
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className={`${baseInput} ${
+                    errors.phone
+                      ? "border-red-500 focus:ring-red-500/40"
+                      : "border-gray-300/40 focus:ring-primary/50"
+                  }`}
+                />
+                {errors.phone && <ErrorText text={errors.phone} />}
+              </div>
+            </div>
+
+            {/* Message */}
+            <div>
+              <textarea
+                name="message"
+                rows={6}
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                className={`${baseInput} resize-none     transition-all duration-300 hover:border-primary/50 hover:glow-box ${
+                  errors.message
+                    ? "border-red-500 focus:ring-red-500/40"
+                    : "border-gray-300/40 focus:ring-primary/50"
+                }`}
+              />
+              {errors.message && <ErrorText text={errors.message} />}
+            </div>
+
+            {success && (
+              <div className="flex items-center gap-2 text-green-500">
+                <CheckCircle className="w-5 h-5" />
+                Message sent successfully!
+              </div>
+            )}
+
+            <Button type="submit" size="xl" className="group w-full">
+              Send Message
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </form>
+        </motion.div>
       </div>
     </section>
   );
 };
+
+const ErrorText = ({ text }: { text: string }) => (
+  <p className="mt-2 flex items-center gap-1 text-sm text-red-500">
+    <AlertCircle className="w-4 h-4" />
+    {text}
+  </p>
+);
 
 export default ContactSection;

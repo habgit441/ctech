@@ -1,42 +1,70 @@
 import { motion } from "framer-motion";
-import { Code2, Smartphone, Cloud, Shield, Cpu, Zap } from "lucide-react";
+import {
+  Code2,
+  Smartphone,
+  Shield,
+  Palette,
+  Video,
+  Camera,
+  Building,
+  Sparkles,
+  Layout,
+} from "lucide-react";
 
 const services = [
+  {
+    icon: Layout,
+    title: "UI/UX Design",
+    description:
+      "User-centered interface and experience designs that improve usability and engagement.",
+  },
+  {
+    icon: Palette,
+    title: "Graphics Designing",
+    description:
+      "Creative visual designs for branding, flyers, social media, and marketing materials.",
+  },
+  {
+    icon: Video,
+    title: "Video Editing",
+    description:
+      "Professional video editing for ads, content creation, and promotional videos.",
+  },
   {
     icon: Code2,
     title: "Web Development",
     description:
-      "Custom web applications built with cutting-edge technologies for optimal performance and scalability.",
+      "Modern, responsive websites and web applications built for performance and scalability.",
   },
   {
     icon: Smartphone,
-    title: "Mobile Apps",
+    title: "App Development",
     description:
-      "Native and cross-platform mobile solutions that deliver seamless user experiences.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Solutions",
-    description:
-      "Scalable cloud infrastructure and migration services for modern enterprises.",
+      "Cross-platform mobile applications for Android and iOS using modern technologies.",
   },
   {
     icon: Shield,
     title: "Cybersecurity",
     description:
-      "Comprehensive security solutions to protect your digital assets and data.",
+      "Security solutions to protect websites, applications, and digital assets.",
   },
   {
-    icon: Cpu,
-    title: "AI & Machine Learning",
+    icon: Building,
+    title: "Architecture Design",
     description:
-      "Intelligent automation and data-driven insights powered by advanced AI.",
+      "Innovative architectural designs, 3D concepts, and structural visualizations.",
   },
   {
-    icon: Zap,
-    title: "DevOps",
+    icon: Camera,
+    title: "Photoshoot Editing",
     description:
-      "Streamlined development pipelines and continuous deployment strategies.",
+      "Professional photo retouching, enhancement, and creative image editing.",
+  },
+  {
+    icon: Sparkles,
+    title: "AI Photoshoot",
+    description:
+      "AI-powered photoshoots that generate studio-quality images without a physical shoot.",
   },
 ];
 
@@ -80,7 +108,7 @@ const ServicesSection = () => {
               className="group glass-card p-8 cursor-pointer transition-all duration-300 hover:border-primary/50 hover:glow-box"
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <service.icon className="w-7 h-7 text-primary" />
               </div>
 

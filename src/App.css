@@ -1,19 +1,22 @@
+/* FIXED ROOT — do NOT center everything globally */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
+/* Keep demo logo styles (harmless) */
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +36,40 @@
   }
 }
 
+/* Optional card padding */
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+/* ✅ FIXED INPUTS (BIGGER + RESPONSIVE) */
+.input-base {
+  width: 100%;
+  min-height: 56px;              /* bigger height */
+  padding: 1rem  45rem;          /* more spacing */
+  border-radius: 0.75rem;
+  background: rgba(100, 116, 139, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Placeholder color */
+.input-base::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Focus state */
+.input-base:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6);
+  border-color: #3b82f6;
+}
+
+/* Textarea sizing */
+textarea.input-base {
+  min-height: 140px;
 }
