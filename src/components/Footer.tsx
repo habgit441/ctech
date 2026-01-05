@@ -29,8 +29,7 @@ const Footer = () => {
   src="/Images/Logo.png"
   alt="Logo"
   className="
-    h-16 sm:h-18 md:h-32
-    w-auto
+    h-16 sm:h-18 md:h-16
     object-contain
   "
 />

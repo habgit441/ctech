@@ -1,0 +1,70 @@
+import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const projectSections = [
+  {
+    id: "graphics",
+    title: "Graphics Design",
+    description: "Branding, flyers, posters, and social media visuals.",
+    moreLink: "/projects/graphics",
+    projects: [
+      {
+        type: "image",
+        src: "https://scontent.flos5-2.fna.fbcdn.net/v/t39.30808-6/567657789_122139225512890936_2113226125727032664_n.jpg",
+      },
+      {
+        type: "image",
+        src: "https://scontent.flos5-2.fna.fbcdn.net/v/t39.30808-6/568522480_122139226154890936_2057100255468559651_n.jpg",
+      },
+      { type: "image", src: "Images/call.png" },
+    ],
+  },
+  {
+    id: "web",
+    title: "Website Development",
+    description: "Modern, scalable websites and web applications.",
+    moreLink: "/projects/web",
+    projects: [
+      { type: "image", src: "/projects/web1.png" },
+      { type: "image", src: "/projects/web2.png" },
+    ],
+  },
+  {
+    id: "uiux",
+    title: "UI / UX Design",
+    description: "User-centered interface designs that focus on usability.",
+    moreLink: "/projects/uiux",
+    projects: [
+      { type: "image", src: "/projects/uiux1.png" },
+      { type: "image", src: "/projects/uiux2.png" },
+    ],
+  },
+  {
+    id: "video",
+    title: "Video Editing",
+    description: "Promotional and motion-driven video content.",
+    moreLink: "/projects/video",
+    projects: [
+      { type: "video", src: "/projects/video1.mp4" },
+      { type: "video", src: "/projects/video2.mp4" },
+    ],
+  },
+  {
+    id: "app",
+    title: "App Development",
+    description: "Cross-platform mobile applications.",
+    moreLink: "/projects/app",
+    projects: [{ type: "image", src: "/projects/app1.png" }],
+  },
+];
+
+const Project = () => {
+  return (
+    <section className="py-20 relative">
+     
+    </section>
+  );
+};
+
+export default Project;
