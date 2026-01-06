@@ -88,9 +88,4 @@ textarea.input-base {
   scrollbar-width: none;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
+

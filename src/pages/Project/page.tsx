@@ -118,20 +118,89 @@ const projectSections = [
     projects: [
       {
         type: "video",
-        src: "/Videos/vix.mp4",
+        src: "/Videos/motion.mp4",
         title: "Promo Video",
         description: "Promo video for brand",
         link: "https://youtu.be/promo_video",
       },
       {
         type: "video",
-        src: "/projects/motion/motion-3.mp4",
+        src: "/Videos/focus.mp4",
         title: "Ad Video",
         description: "Social media ad video",
         link: "https://instagram.com/ad_video",
       },
+       {
+        type: "video",
+        src: "/Videos/vix.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+       {
+        type: "video",
+        src: "/Videos/fucus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+       {
+        type: "video",
+        src: "/Videos/fucus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      
     ],
   },
+
+  {
+    id: "Video Editing",
+    title: "Video editing",
+    description:
+      "Professional video editing for ads, content creation, and promotional videos.",
+    moreLink: "",
+    projects: [
+      {
+        type: "video",
+        src: "/Videos/motion.mp4",
+        title: "Promo Video",
+        description: "Promo video for brand",
+        link: "https://youtu.be/promo_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/focus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+       {
+        type: "video",
+        src: "/Videos/vix.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+       {
+        type: "video",
+        src: "/Videos/fucus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+       {
+        type: "video",
+        src: "/Videos/fucus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      
+    ],
+  },
+   
 ];
 
 
@@ -179,7 +248,7 @@ function ScrollRow({ projects }: { projects: any[] }) {
                 <video
                   src={project.src}
                   controls
-                  className="w-full h-48 object-cover"
+                  className="w-full h-98 object-cover"
                 />
                 {project.link && (
                   <a
@@ -267,14 +336,7 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {section.moreLink && (
-                  <Link
-                    to={section.moreLink}
-                    className="inline-flex items-center gap-2 text-primary text-sm font-medium"
-                  >
-                    View more <ArrowRight size={18} />
-                  </Link>
-                )}
+                
               </div>
 
               <ScrollRow projects={section.projects} />

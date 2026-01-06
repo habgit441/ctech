@@ -145,3 +145,9 @@
     text-wrap: balance;
   }
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

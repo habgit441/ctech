@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-/* ---------------- TYPEWRITER COMPONENT (LOOPING) ---------------- */
+
 const Typewriter = ({
   text,
   speed = 80,
@@ -18,7 +19,7 @@ const Typewriter = ({
 
   useEffect(() => {
     let i = displayedText.length;
-    
+
     const interval = setInterval(() => {
       if (!isDeleting) {
         // Typing forward
@@ -52,12 +53,12 @@ const Typewriter = ({
 };
 
 //  ---------------- FALLING TEXT ANIMATION ---------------- 
-const FallingText = ({ 
-  children, 
+const FallingText = ({
+  children,
   delay = 0,
-  className = "" 
-}: { 
-  children: React.ReactNode; 
+  className = ""
+}: {
+  children: React.ReactNode;
   delay?: number;
   className?: string;
 }) => {
@@ -141,22 +142,36 @@ const HeroSection = () => {
             thrive in the modern technological landscape.
           </motion.p>
 
-          {/* remove this CTA Buttons */}
+          
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button variant="hero" size="xl" className="group">
+            {/* Scroll to contact section */}
+            <Button
+              variant="hero"
+              size="xl"
+              className="group"
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
               Start Your Project
-              <link rel="stylesheet" href="" /><ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="glass" size="xl">
-              Explore Our Work
-            </Button>
-          </motion.div>
 
+            {/* Navigate to projects page */}
+            <Link to="/project">
+              <Button variant="glass" size="xl">
+                Explore Our Work
+              </Button>
+            </Link>
+          </motion.div>
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
