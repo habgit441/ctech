@@ -16,10 +16,10 @@ const projectSections = [
     projects: [
       {
         type: "image",
-        src: "/Images/call.png",
+        src: "/Images/habdev.png",
         title: "Call App",
         description: "A modern call web app",
-        link: "https://call-app.example.com",
+        link: "https://habdevtech.vercel.app/",
       },
       {
         type: "image",
@@ -74,7 +74,7 @@ const projectSections = [
       },
       {
         type: "image",
-        src: "/projects/graphics/graphic-2.jpg",
+        src: "/Images/graphics.png",
         title: "Poster",
         description: "Event poster",
         link: "https://behance.net/poster",
@@ -317,7 +317,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="space-y-32">
+        <div className="space-y-2">
           {projectSections.map((section, index) => (
             <motion.div
               key={section.id}
