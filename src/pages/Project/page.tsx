@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
-
 const projectSections = [
   {
     id: "web",
@@ -16,6 +15,20 @@ const projectSections = [
     projects: [
       {
         type: "image",
+        src: "/Images/habdev.png",
+        title: "Call App",
+        description: "A modern call web app",
+        link: "https://habdevtech.vercel.app/",
+      },
+      {
+        type: "image",
+        src: "/projects/web/web-2.jpg",
+        title: "Portfolio",
+        description: "Personal portfolio website",
+        link: "https://portfolio.example.com",
+      },
+      {
+        type: "image",
         src: "/Images/call.png",
         title: "Call App",
         description: "A modern call web app",
@@ -28,21 +41,7 @@ const projectSections = [
         description: "Personal portfolio website",
         link: "https://portfolio.example.com",
       },
-       {
-        type: "image",
-        src: "/Images/call.png",
-        title: "Call App",
-        description: "A modern call web app",
-        link: "https://call-app.example.com",
-      },
       {
-        type: "image",
-        src: "/projects/web/web-2.jpg",
-        title: "Portfolio",
-        description: "Personal portfolio website",
-        link: "https://portfolio.example.com",
-      },
-       {
         type: "image",
         src: "/Images/call.png",
         title: "Call App",
@@ -74,12 +73,12 @@ const projectSections = [
       },
       {
         type: "image",
-        src: "/projects/graphics/graphic-2.jpg",
+        src: "/Images/graphics.png",
         title: "Poster",
         description: "Event poster",
         link: "https://behance.net/poster",
       },
-          {
+      {
         type: "image",
         src: "/Images/call.png",
         title: "Flyer",
@@ -93,7 +92,7 @@ const projectSections = [
         description: "Event poster",
         link: "https://behance.net/poster",
       },
-          {
+      {
         type: "image",
         src: "/Images/call.png",
         title: "Flyer",
@@ -111,10 +110,55 @@ const projectSections = [
   },
   {
     id: "motion",
-    title: "Motion / Video Design",
+    title: "Motion Design",
     description:
       "High-quality motion graphics and video edits for brands, ads, and campaigns.",
     moreLink: "/projects/motion",
+    projects: [
+      {
+        type: "video",
+        src: "/Videos/motion.mp4",
+        title: "Promo Video",
+        description: "Promo video for brand",
+        link: "https://youtu.be/promo_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/focus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/motion.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/motion.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/motion.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+    ],
+  },
+
+  {
+    id: "Video Editing",
+    title: "Video editing",
+    description:
+      "Professional video editing for ads, content creation, and promotional videos.",
+    moreLink: "",
     projects: [
       {
         type: "video",
@@ -125,7 +169,28 @@ const projectSections = [
       },
       {
         type: "video",
-        src: "/projects/motion/motion-3.mp4",
+        src: "/Videos/vix.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/vix.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/fucus.mp4",
+        title: "Ad Video",
+        description: "Social media ad video",
+        link: "https://instagram.com/ad_video",
+      },
+      {
+        type: "video",
+        src: "/Videos/fucus.mp4",
         title: "Ad Video",
         description: "Social media ad video",
         link: "https://instagram.com/ad_video",
@@ -133,7 +198,6 @@ const projectSections = [
     ],
   },
 ];
-
 
 function ScrollRow({ projects }: { projects: any[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -175,12 +239,14 @@ function ScrollRow({ projects }: { projects: any[] }) {
             className="min-w-[360px] h-80 border rounded-lg overflow-hidden shadow-sm flex flex-col bg-background"
           >
             {project.type === "video" ? (
-              <div className="relative">
+              <div className="relative w-full aspect-video bg-black">
                 <video
                   src={project.src}
                   controls
-                  className="w-full h-48 object-cover"
+                 className="min-w-[420px] border rounded-lg overflow-hidden shadow-sm flex flex-col bg-background"
+
                 />
+
                 {project.link && (
                   <a
                     href={project.link}
@@ -248,7 +314,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="space-y-32">
+        <div className="space-y-2">
           {projectSections.map((section, index) => (
             <motion.div
               key={section.id}
@@ -266,15 +332,6 @@ export default function Projects() {
                     {section.description}
                   </p>
                 </div>
-
-                {section.moreLink && (
-                  <Link
-                    to={section.moreLink}
-                    className="inline-flex items-center gap-2 text-primary text-sm font-medium"
-                  >
-                    View more <ArrowRight size={18} />
-                  </Link>
-                )}
               </div>
 
               <ScrollRow projects={section.projects} />
